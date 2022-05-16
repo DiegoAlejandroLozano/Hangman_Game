@@ -5,8 +5,7 @@ import mensajes
 class Ahorcado:
 
     #Método encargado de iniciarlizar el objeto Ahorcado
-    def __init__(self):        
-        self.__titulo_juego = mensajes.TITULO_JUEGO
+    def __init__(self):  
         self.__palabra_adivinar = self.__seleccionar_palabra_azar()
         self.__palabra_guiones = self.__inicializar_palabra_guiones()
 
@@ -36,7 +35,7 @@ class Ahorcado:
     #Método encargado de actualizar la pantalla del juego cuando se encuentra una letra
     def actualizar_pantallar(self):
         os.system("cls")
-        print(self.__titulo_juego)
+        print(mensajes.TITULO_JUEGO)
         print("Palabra oculta: %s" % self.__palabra_guiones)
 
     #Método encargado de verificar si el usuario ingreso una letra
@@ -62,7 +61,7 @@ class Ahorcado:
     #Método encargada de limpiar la pantalla cuando se inicia el juego
     def dibujar_pantalla_inicio(self):
         os.system("cls")
-        print(self.__titulo_juego)
+        print(mensajes.TITULO_JUEGO)
         matriz = ["_" for letra in self.__palabra_adivinar]
         print("Palabra oculta: %s" % "".join(matriz))
 
@@ -73,26 +72,7 @@ class Ahorcado:
         else:
             return False
 
-#Función de inicio
-def main():
-
-    ahorcado = Ahorcado()
-    ahorcado.dibujar_pantalla_inicio()
-    palabra_encontrada = False
-
-    while not palabra_encontrada:
-        letra = input("Ingrese una letra: ")
-        if not ahorcado.verificar_letra(letra) and not ahorcado.comprobar_letra_en_palabra(letra):
-            continue
-        else:
-            ahorcado.construir_palabra(letra)
-            ahorcado.actualizar_pantallar()
-            if ahorcado.comparar_palabras():
-                print("Palabra encontrada")
-                palabra_encontrada = True
-            else:
-                continue
-
-#inicializando el programa
-if __name__ == "__main__":
-    main()
+    #Método encargado de dibujar la pantalla cuando el usuario gana el juego
+    def dibujar_pantalla_ganadora(self):
+        os.system("cls")
+        print(mensajes.MENSAJE_JUEGO_GANADOR)
